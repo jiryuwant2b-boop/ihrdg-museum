@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IHRDG Museum - Myanmar 2021</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-orange: #f2441d;
+            --primary-blue: #0c0ca6;
+            --neutral-bg: #ffffff;
+            --light-gray: #f5f5f5;
+            --dark-gray: #333333;
+            --text-color: #222222;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--neutral-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header & Navigation - FIXED structure */
+        header {
+            background-color: var(--neutral-bg);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            flex-wrap: wrap;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(45deg, var(--primary-orange), var(--primary-blue));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .logo-image {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+        }
+        
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--primary-blue), var(--primary-orange));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .tagline {
+            font-size: 14px;
+            color: var(--primary-blue);
+            font-style: italic;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--dark-gray);
+            font-weight: 600;
+            font-size: 16px;
+            transition: color 0.3s;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        nav a:hover, nav a.active {
+            color: var(--primary-orange);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-orange);
+            transition: width 0.3s;
+        }
+        
+        nav a:hover::after, nav a.active::after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--primary-blue);
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(12, 12, 166, 0.85), rgba(242, 68, 29, 0.8)), url('https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+            margin-bottom: 40px;
+            border-radius: 0 0 20px 20px;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+        
+        /* Categories */
+        .categories {
+            margin: 40px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            color: var(--primary-blue);
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary-orange);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        
+        .category-filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+        
+        .category-btn {
+            padding: 10px 20px;
+            background-color: var(--light-gray);
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: var(--dark-gray);
+        }
+        
+        .category-btn:hover, .category-btn.active {
+            background-color: var(--primary-blue);
+            color: white;
+        }
+        
+        /* Content Grid */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .content-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+        
+        .content-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-media {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+            background-color: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-blue);
+            font-size: 40px;
+            position: relative;
+        }
+        
+        .card-media img,
+        .card-media video,
+        .card-media audio {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+        
+        .card-media audio {
+            object-fit: contain;
+            padding: 10px;
+        }
+        
+        .content-card:hover .card-media img {
+            transform: scale(1.05);
+        }
+        
+        .card-body {
+            padding: 20px;
+        }
+        
+        .card-category {
+            display: inline-block;
+            padding: 5px 12px;
+            background-color: var(--light-gray);
+            color: var(--primary-blue);
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .card-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--dark-gray);
+        }
+        
+        .card-description {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            color: #888;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+        
+        /* LIGHTBOX MODAL - new interaction */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .modal.show {
+            display: flex;
+            opacity: 1;
+        }
+        
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+            animation: zoomIn 0.3s;
+        }
+        
+        .modal-content img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 4px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 10px;
+            transition: color 0.3s;
+        }
+        
+        .close-modal:hover {
+            color: var(--primary-orange);
+        }
+        
+        .modal-caption {
+            position: absolute;
+            bottom: -40px;
+            left: 0;
+            width: 100%;
+            color: white;
+            text-align: center;
+            font-size: 16px;
+            padding: 10px;
+            background: rgba(0,0,0,0.6);
+            border-radius: 4px;
+        }
+        
+        @keyframes zoomIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        /* Comments Section */
+        .comments-section {
+            background-color: var(--light-gray);
+            padding: 40px 20px;
+            border-radius: 10px;
+            margin: 40px 0;
+        }
+        
+        .comment-form {
+            margin-bottom: 40px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--primary-blue);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-orange);
+        }
+        
+        .btn {
+            padding: 12px 30px;
+            background-color: var(--primary-blue);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: var(--primary-orange);
+        }
+        
+        .comment {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        
+        .comment-author {
+            font-weight: 600;
+            color: var(--primary-blue);
+        }
+        
+        .comment-date {
+            color: #888;
+        }
+        
+        /* Contact Section */
+        .contact-section {
+            padding: 60px 0;
+        }
+        
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+        
+        .contact-info h3 {
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+        }
+        
+        .contact-details {
+            margin-top: 30px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary-blue);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-gray);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: white;
+        }
+        
+        .footer-links h4, .footer-social h4 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-orange);
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .social-icon:hover {
+            background-color: var(--primary-orange);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 14px;
+            color: #aaa;
+        }
+        
+        /* Loading and Error States */
+        .loading, .error, .no-content {
+            text-align: center;
+            padding: 40px;
+            font-size: 18px;
+            color: var(--primary-blue);
+            grid-column: 1 / -1;
+        }
+        
+        .error {
+            color: var(--primary-orange);
+        }
+        
+        /* Media Queries */
+        @media (max-width: 992px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: row;
+            }
+            
+            .logo-text {
+                font-size: 20px;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            nav {
+                width: 100%;
+                margin-top: 15px;
+                display: none;
+            }
+            
+            nav.active {
+                display: block;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .category-filters {
+                gap: 10px;
+            }
+            
+            .category-btn {
+                padding: 8px 15px;
+                font-size: 14px;
+            }
+            
+            .modal-content {
+                max-width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header - FIXED structure -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="logo.png" alt="IHRDG Museum Logo" class="logo-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+               
+            </div>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="#categories">Categories</a></li>
+                    <li><a href="#comments">Comments</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>IHRDG Museum</h1>
+            <p>A digital archive documenting IHRDG's Moments through art, music, memes, podcasts, and personal stories. This is a museum for the future, preserving our collective memory.</p>
+        </div>
+    </section>
+
+    <!-- Categories & Content -->
+    <section class="categories" id="categories">
+        <div class="container">
+            <h2 class="section-title">Explore Our Collections</h2>
+            
+            <div class="category-filters" id="categoryFilters">
+                <button class="category-btn active" data-category="all">All Content</button>
+                <button class="category-btn" data-category="Music">Music</button>
+                <button class="category-btn" data-category="Arts">Arts</button>
+                <button class="category-btn" data-category="Meme">Meme</button>
+                <button class="category-btn" data-category="Videos">Videos</button>
+                <button class="category-btn" data-category="Blog">Blog</button>
+                <button class="category-btn" data-category="Student moments">Student Moments</button>
+                <button class="category-btn" data-category="Podcast">Podcast</button>
+                <button class="category-btn" data-category="Club list">Club List</button>
+            </div>
+            
+            <div class="content-grid" id="contentGrid">
+                <!-- Content will be loaded here from Airtable -->
+                <div class="loading">Loading content...</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comments Section -->
+    <section class="comments-section" id="comments">
+        <div class="container">
+            <h2 class="section-title">Share Your Thoughts</h2>
+            
+            <div class="comment-form">
+                <form id="commentForm">
+                    <div class="form-group">
+                        <label for="commentAuthor">Your Name (Optional)</label>
+                        <input type="text" id="commentAuthor" class="form-control" placeholder="Anonymous">
+                    </div>
+                    <div class="form-group">
+                        <label for="commentText">Your Comment</label>
+                        <textarea id="commentText" class="form-control" rows="4" placeholder="Share your thoughts, memories, or reflections..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Submit Comment</button>
+                </form>
+            </div>
+            
+            <div id="commentsList">
+                <h3>Recent Comments</h3>
+                <!-- Comments will be loaded here from Airtable -->
+                <div class="loading">Loading comments...</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Get In Touch</h3>
+                    <p>We welcome contributions, suggestions, and feedback. Feel free to reach out if you have content to share or questions about the museum.</p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4>Email</h4>
+                                <p>ihrdg.admin@springuniversitymm.com</p>
+                                <p>ihrdgalumnicouncil@springuniversitymm.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-share-alt"></i>
+                            </div>
+                            <div>
+                                <h4>Share Content</h4>
+                                <p>Submit your art, music, stories via our submission form</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-link"></i>
+                            </div>
+                            <div>
+                                <h4>Important Links</h4>
+                                <p><a href="#" style="color: var(--primary-blue);">Resource Directory</a> | <a href="#" style="color: var(--primary-blue);">Support Organizations</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="contactName">Your Name</label>
+                            <input type="text" id="contactName" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactEmail">Your Email</label>
+                            <input type="email" id="contactEmail" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactSubject">Subject</label>
+                            <input type="text" id="contactSubject" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactMessage">Message</label>
+                            <textarea id="contactMessage" class="form-control" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox Modal - NEW -->
+    <div id="imageModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <img id="modalImage" src="" alt="Enlarged view">
+            <div id="modalCaption" class="modal-caption"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">IHRDG Museum</div>
+                    <p>A digital archive preserving the art, stories, and memories of the 2021 Myanmar Spring Revolution for future generations.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#categories">Collections</a></li>
+                        <li><a href="#comments">Share Thoughts</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-social">
+                    <h4>Connect With Us</h4>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/springuniversitymm" class="social-icon" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.linkedin.com/company/spring-university-myanmar/posts/?feedView=all" class="social-icon" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://www.instagram.com/springuniversitymm?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="social-icon" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                        <a href="https://youtube.com/@springuniversitymyanmar4896?si=1f05Xv-zhtRYZgNv" class="social-icon" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 IHRDG Museum. All rights reserved. | Arts have no boundaries.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Airtable Configuration with YOUR Personal Access Token
+        const AIRTABLE_PERSONAL_ACCESS_TOKEN = 'patJ23mmEvKfaKkmL.2a2f02339b517bb779a78cacc59bcd667b424642b04d2d1907241f254aaa09e3';
+        const AIRTABLE_BASE_ID = 'app4ua1ZKgZWBSRxQ';
+        const AIRTABLE_TABLE_NAME = 'Content';
+        const AIRTABLE_COMMENTS_TABLE = 'Comments';
+        const AIRTABLE_CONTACTS_TABLE = 'Contacts';
+        
+        // Airtable API Endpoints
+        const AIRTABLE_API_URL = `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}`;
+        
+        // DOM Elements
+        const contentGrid = document.getElementById('contentGrid');
+        const categoryFilters = document.getElementById('categoryFilters');
+        const commentForm = document.getElementById('commentForm');
+        const commentsList = document.getElementById('commentsList');
+        const contactForm = document.getElementById('contactForm');
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+        
+        // Modal elements
+        const modal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+        const modalCaption = document.getElementById('modalCaption');
+        const closeModal = document.querySelector('.close-modal');
+        
+        // Current filter
+        let currentFilter = 'all';
+        
+        // Airtable API Headers
+        const airtableHeaders = {
+            'Authorization': `Bearer ${AIRTABLE_PERSONAL_ACCESS_TOKEN}`,
+            'Content-Type': 'application/json'
+        };
+        
+        // Initialize the website
+        document.addEventListener('DOMContentLoaded', function() {
+            loadContent();
+            loadComments();
+            setupEventListeners();
+        });
+        
+        // Setup event listeners
+        function setupEventListeners() {
+            // Category filter buttons
+            categoryFilters.addEventListener('click', function(e) {
+                if (e.target.classList.contains('category-btn')) {
+                    document.querySelectorAll('.category-btn').forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    e.target.classList.add('active');
+                    currentFilter = e.target.dataset.category;
+                    loadContent();
+                }
+            });
+            
+            // Comment form submission
+            commentForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                submitComment();
+            });
+            
+            // Contact form submission
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                submitContact();
+            });
+            
+            // Mobile menu toggle
+            mobileMenuBtn.addEventListener('click', function() {
+                mainNav.classList.toggle('active');
+                mobileMenuBtn.innerHTML = mainNav.classList.contains('active') 
+                    ? '<i class="fas fa-times"></i>' 
+                    : '<i class="fas fa-bars"></i>';
+            });
+            
+            // Smooth scroll for navigation links
+            document.querySelectorAll('nav a').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+                    if (targetSection) {
+                        if (mainNav.classList.contains('active')) {
+                            mainNav.classList.remove('active');
+                            mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                        }
+                        document.querySelectorAll('nav a').forEach(navLink => {
+                            navLink.classList.remove('active');
+                        });
+                        this.classList.add('active');
+                        window.scrollTo({
+                            top: targetSection.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Modal close events
+            closeModal.addEventListener('click', closeImageModal);
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    closeImageModal();
+                }
+            });
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && modal.classList.contains('show')) {
+                    closeImageModal();
+                }
+            });
+        }
+        
+        // Close modal function
+        function closeImageModal() {
+            modal.classList.remove('show');
+            modalImage.src = '';
+            modalCaption.textContent = '';
+        }
+        
+        // Load content from Airtable
+        async function loadContent() {
+            try {
+                contentGrid.innerHTML = '<div class="loading">Loading content...</div>';
+                
+                let filterByFormula = '';
+                if (currentFilter !== 'all') {
+                    filterByFormula = `AND({Published}, {Category}='${currentFilter}')`;
+                } else {
+                    filterByFormula = '{Published}';
+                }
+                
+                const encodedFormula = encodeURIComponent(filterByFormula);
+                const response = await fetch(
+                    `${AIRTABLE_API_URL}/${AIRTABLE_TABLE_NAME}?filterByFormula=${encodedFormula}&sort%5B0%5D%5Bfield%5D=Date&sort%5B0%5D%5Bdirection%5D=desc`,
+                    {
+                        headers: airtableHeaders
+                    }
+                );
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                if (!data.records || data.records.length === 0) {
+                    contentGrid.innerHTML = '<div class="no-content">No content found. Add content in Airtable and check "Published".</div>';
+                    return;
+                }
+                
+                contentGrid.innerHTML = '';
+                
+                data.records.forEach(record => {
+                    const content = record.fields;
+                    const mediaUrl = content.Media ? content.Media[0].url : '';
+                    const mediaType = content.MediaType || '';
+                    
+                    let mediaIcon = 'fa-file-alt';
+                    if (mediaType === 'Image') mediaIcon = 'fa-image';
+                    else if (mediaType === 'Audio') mediaIcon = 'fa-music';
+                    else if (mediaType === 'Video') mediaIcon = 'fa-video';
+                    
+                    const contentCard = document.createElement('div');
+                    contentCard.className = 'content-card';
+                    
+                    // Generate appropriate media HTML based on type
+                    let mediaHTML = '';
+                    if (mediaUrl && mediaType === 'Image') {
+                        mediaHTML = `<img src="${mediaUrl}" alt="${content.Title || 'Image'}" class="clickable-image" data-title="${content.Title || ''}" data-caption="${content.Description || ''}">`;
+                    } else if (mediaUrl && mediaType === 'Video') {
+                        mediaHTML = `<video src="${mediaUrl}" controls playsinline style="width:100%;height:100%;object-fit:cover;background:#000;"></video>`;
+                    } else if (mediaUrl && mediaType === 'Audio') {
+                        mediaHTML = `<audio src="${mediaUrl}" controls style="width:100%;height:100%;object-fit:contain;background:var(--light-gray);"></audio>`;
+                    } else if (mediaUrl) {
+                        // Fallback for other media types (display as clickable image? better show icon)
+                        mediaHTML = `<img src="${mediaUrl}" alt="${content.Title}" style="width:100%;height:100%;object-fit:cover;">`;
+                    } else {
+                        mediaHTML = `<i class="fas ${mediaIcon}"></i>`;
+                    }
+                    
+                    contentCard.innerHTML = `
+                        <div class="card-media">
+                            ${mediaHTML}
+                        </div>
+                        <div class="card-body">
+                            <span class="card-category">${content.Category || 'Uncategorized'}</span>
+                            <h3 class="card-title">${content.Title || 'Untitled'}</h3>
+                            <p class="card-description">${content.Description || 'No description available.'}</p>
+                            <div class="card-footer">
+                                <span><i class="far fa-calendar"></i> ${formatDate(content.Date)}</span>
+                                <span><i class="far fa-eye"></i> ${content.Views || 0}</span>
+                            </div>
+                        </div>
+                    `;
+                    
+                    contentGrid.appendChild(contentCard);
+                });
+                
+                // Attach click event to all clickable images for lightbox
+                attachImageClickHandlers();
+                
+            } catch (error) {
+                console.error('Error loading content:', error);
+                contentGrid.innerHTML = '<div class="error">Failed to load content. Check your Airtable connection.</div>';
+            }
+        }
+        
+        // Attach click handlers to images that should open in modal
+        function attachImageClickHandlers() {
+            const clickableImages = document.querySelectorAll('.clickable-image');
+            clickableImages.forEach(img => {
+                img.addEventListener('click', function(e) {
+                    e.stopPropagation(); // Prevent card click if any
+                    const imageUrl = this.src;
+                    const title = this.dataset.title || 'IHRDG Museum Archive';
+                    const caption = this.dataset.caption || '';
+                    modalImage.src = imageUrl;
+                    modalCaption.innerHTML = `<strong>${title}</strong> ${caption ? '— ' + caption : ''}`;
+                    modal.classList.add('show');
+                });
+            });
+        }
+        
+        // Load comments from Airtable
+        async function loadComments() {
+            try {
+                commentsList.innerHTML = '<h3>Recent Comments</h3><div class="loading">Loading comments...</div>';
+                
+                const response = await fetch(
+                    `${AIRTABLE_API_URL}/${AIRTABLE_COMMENTS_TABLE}?filterByFormula={Approved}&sort%5B0%5D%5Bfield%5D=Date&sort%5B0%5D%5Bdirection%5D=desc&maxRecords=10`,
+                    {
+                        headers: airtableHeaders
+                    }
+                );
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                if (!data.records || data.records.length === 0) {
+                    commentsList.innerHTML = '<h3>Recent Comments</h3><div class="no-content">No comments yet. Be the first!</div>';
+                    return;
+                }
+                
+                let commentsHTML = '<h3>Recent Comments</h3>';
+                data.records.forEach(record => {
+                    const comment = record.fields;
+                    commentsHTML += `
+                        <div class="comment">
+                            <div class="comment-header">
+                                <span class="comment-author">${comment.Author || 'Anonymous'}</span>
+                                <span class="comment-date">${formatDate(comment.Date)}</span>
+                            </div>
+                            <p>${comment.Comment}</p>
+                        </div>
+                    `;
+                });
+                
+                commentsList.innerHTML = commentsHTML;
+                
+            } catch (error) {
+                console.error('Error loading comments:', error);
+                commentsList.innerHTML = '<h3>Recent Comments</h3><div class="error">Failed to load comments.</div>';
+            }
+        }
+        
+        // Submit a new comment - FIXED VERSION (no Date field)
+        async function submitComment() {
+            try {
+                const author = document.getElementById('commentAuthor').value || 'Anonymous';
+                const commentText = document.getElementById('commentText').value;
+                
+                if (!commentText.trim()) {
+                    alert('Please enter a comment.');
+                    return;
+                }
+                
+                const response = await fetch(`${AIRTABLE_API_URL}/${AIRTABLE_COMMENTS_TABLE}`, {
+                    method: 'POST',
+                    headers: airtableHeaders,
+                    body: JSON.stringify({
+                        records: [{
+                            fields: {
+                                Author: author,
+                                Comment: commentText,
+                                Approved: false // Needs moderation
+                            }
+                        }]
+                    })
+                });
+                
+                console.log('Comment response status:', response.status);
+                
+                if (!response.ok) {
+                    if (response.status === 422) {
+                        alert('Comments table structure issue. Check fields in Airtable: Author, Comment, Approved');
+                    }
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                
+                // Clear form
+                document.getElementById('commentForm').reset();
+                
+                // Show success message
+                alert('✅ Comment submitted! It will appear after moderation.');
+                
+                // Reload comments
+                loadComments();
+                
+            } catch (error) {
+                console.error('Error submitting comment:', error);
+                alert('Failed to submit comment. Please try again.');
+            }
+        }
+        
+        // Submit contact form - FIXED VERSION (no Date field)
+        async function submitContact() {
+            try {
+                const name = document.getElementById('contactName').value;
+                const email = document.getElementById('contactEmail').value;
+                const subject = document.getElementById('contactSubject').value;
+                const message = document.getElementById('contactMessage').value;
+                
+                if (!name || !email || !subject || !message) {
+                    alert('Please fill all required fields.');
+                    return;
+                }
+                
+                const response = await fetch(`${AIRTABLE_API_URL}/${AIRTABLE_CONTACTS_TABLE}`, {
+                    method: 'POST',
+                    headers: airtableHeaders,
+                    body: JSON.stringify({
+                        records: [{
+                            fields: {
+                                Name: name,
+                                Email: email,
+                                Subject: subject,
+                                Message: message,
+                                Status: "New"
+                            }
+                        }]
+                    })
+                });
+                
+                console.log('Contact response status:', response.status);
+                
+                if (!response.ok) {
+                    if (response.status === 422) {
+                        alert('Contacts table structure issue. Check fields in Airtable: Name, Email, Subject, Message, Status');
+                    }
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                
+                document.getElementById('contactForm').reset();
+                alert('✅ Message sent successfully! We will get back to you soon.');
+                
+            } catch (error) {
+                console.error('Error submitting contact form:', error);
+                alert('Failed to send message. Please try again.');
+            }
+        }
+        
+        // Format date for display
+        function formatDate(dateString) {
+            if (!dateString) return 'Date unknown';
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'short', 
+                day: 'numeric' 
+            });
+        }
+    </script>
+</body>
+</html>
